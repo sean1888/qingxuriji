@@ -1,0 +1,42 @@
+<view class="container">
+  <!-- 头部用户信息 -->
+  <view class="header">
+    <view class="user-info">
+      <image class="avatar" src="{{userInfo.avatarUrl || '/images/default-avatar.png'}}"></image>
+      <text class="nickname">{{userInfo.nickName || '未登录'}}</text>
+    </view>
+    <view class="today-mood">
+      <text class="label">今日心情</text>
+      <view class="mood-icon" bindtap="goToRecord">
+        {{todayMood ? todayMood.icon : '😶'}}
+      </view>
+    </view>
+  </view>
+
+  <!-- 快速记录区 -->
+  <view class="quick-record">
+    <view class="title">快速记录</view>
+    <view class="mood-list">
+      <view class="mood-item" wx:for="{{moodList}}" wx:key="value" bindtap="selectMood" data-mood="{{item}}">
+        <text class="mood-emoji">{{item.icon}}</text>
+        <text class="mood-label">{{item.label}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 心情统计 -->
+  <view class="mood-stats">
+    <view class="title">本周心情</view>
+    <view class="stats-content">
+      <!-- 这里后续会添加图表组件 -->
+    </view>
+  </view>
+
+  <!-- 每日提示 -->
+  <view class="daily-tips">
+    <view class="title">今日提示</view>
+    <view class="tip-content">
+      {{dailyTip || '记录每一天的心情，让生活更美好~'}}
+    </view>
+  </view>
+</view> 

@@ -1,0 +1,60 @@
+<view class="container">
+  <!-- 时间范围选择 -->
+  <view class="time-range">
+    <picker mode="date" fields="month" value="{{currentMonth}}" bindchange="monthChange">
+      <view class="month-picker">
+        {{currentMonth}} <text class="picker-hint">切换月份</text>
+      </view>
+    </picker>
+  </view>
+
+  <!-- 心情日历 -->
+  <view class="mood-calendar">
+    <view class="calendar-header">
+      <view class="weekday" wx:for="{{['日','一','二','三','四','五','六']}}" wx:key="*this">{{item}}</view>
+    </view>
+    <view class="calendar-body">
+      <view class="day-item {{item.currentMonth ? '' : 'other-month'}}" 
+            wx:for="{{calendarDays}}" 
+            wx:key="date"
+            bindtap="selectDay"
+            data-date="{{item.date}}">
+        <view class="day-number">{{item.day}}</view>
+        <view class="mood-icon" wx:if="{{item.mood}}">{{item.mood.icon}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 心情统计 -->
+  <view class="mood-stats">
+    <view class="stats-title">本月心情统计</view>
+    <view class="stats-content">
+      <view class="stats-item" wx:for="{{moodStats}}" wx:key="mood">
+        <text class="mood-icon">{{item.icon}}</text>
+        <text class="mood-count">{{item.count}}天</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 心情趋势图 -->
+  <view class="mood-trend">
+    <view class="trend-title">心情变化趋势</view>
+    <view class="trend-chart">
+      <!-- 这里后续会接入图表组件 -->
+      <view class="chart-placeholder">图表开发中...</view>
+    </view>
+  </view>
+
+  <!-- 标签分析 -->
+  <view class="tag-analysis">
+    <view class="analysis-title">情绪标签分析</view>
+    <view class="tags-cloud">
+      <view class="tag-item" 
+            wx:for="{{tagStats}}" 
+            wx:key="tag"
+            style="font-size: {{item.weight}}rpx">
+        {{item.tag}}
+      </view>
+    </view>
+  </view>
+</view> 

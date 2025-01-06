@@ -1,0 +1,205 @@
+.container {
+  padding: 20rpx;
+  background: #f6f6f6;
+  min-height: 100vh;
+}
+
+/* 通用样式 */
+.section-title {
+  font-size: 32rpx;
+  color: #333;
+  margin-bottom: 20rpx;
+  font-weight: bold;
+}
+
+/* 日期选择器 */
+.date-picker {
+  background: #fff;
+  padding: 30rpx;
+  border-radius: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.picker-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.date-text {
+  font-size: 34rpx;
+  color: #333;
+}
+
+.picker-hint {
+  font-size: 24rpx;
+  color: #999;
+}
+
+/* 心情选择器 */
+.mood-selector {
+  background: #fff;
+  padding: 30rpx;
+  border-radius: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.mood-list {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.mood-item {
+  width: 120rpx;
+  text-align: center;
+  padding: 20rpx 0;
+  border-radius: 10rpx;
+}
+
+.mood-item.selected {
+  background: #e6f3fa;
+}
+
+.mood-emoji {
+  font-size: 50rpx;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.mood-label {
+  font-size: 24rpx;
+  color: #666;
+}
+
+/* 心情强度 */
+.mood-intensity {
+  background: #fff;
+  padding: 30rpx;
+  border-radius: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+/* 日记内容 */
+.diary-content {
+  background: #fff;
+  padding: 30rpx;
+  border-radius: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.content-textarea {
+  width: 100%;
+  height: 300rpx;
+  padding: 20rpx;
+  box-sizing: border-box;
+  font-size: 28rpx;
+  line-height: 1.6;
+  background: #f8f8f8;
+  border-radius: 10rpx;
+}
+
+.word-count {
+  text-align: right;
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 10rpx;
+}
+
+/* 标签选择 */
+.tags-section {
+  background: #fff;
+  padding: 30rpx;
+  border-radius: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.tags-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tag-item {
+  padding: 10rpx 30rpx;
+  background: #f0f0f0;
+  border-radius: 30rpx;
+  margin: 10rpx;
+  font-size: 26rpx;
+  color: #666;
+}
+
+.tag-item.selected {
+  background: #1296db;
+  color: #fff;
+}
+
+.add-tag {
+  background: #fff;
+  border: 2rpx dashed #999;
+}
+
+.add-icon {
+  font-size: 32rpx;
+  color: #999;
+}
+
+/* 图片上传 */
+.image-uploader {
+  background: #fff;
+  padding: 30rpx;
+  border-radius: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.image-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.image-item {
+  width: 200rpx;
+  height: 200rpx;
+  margin: 10rpx;
+  position: relative;
+}
+
+.image-item image {
+  width: 100%;
+  height: 100%;
+  border-radius: 10rpx;
+}
+
+.delete-btn {
+  position: absolute;
+  right: -10rpx;
+  top: -10rpx;
+  width: 40rpx;
+  height: 40rpx;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  color: #fff;
+  text-align: center;
+  line-height: 40rpx;
+}
+
+.upload-btn {
+  width: 200rpx;
+  height: 200rpx;
+  background: #f8f8f8;
+  border-radius: 10rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10rpx;
+}
+
+/* 保存按钮 */
+.save-btn {
+  background: #1296db;
+  color: #fff;
+  text-align: center;
+  padding: 30rpx 0;
+  border-radius: 20rpx;
+  margin: 40rpx 0;
+  font-size: 32rpx;
+} 

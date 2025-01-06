@@ -1,0 +1,95 @@
+<view class="container">
+  <!-- 日期选择器 -->
+  <view class="date-picker">
+    <picker mode="date" value="{{date}}" start="2020-01-01" end="2030-12-31" bindchange="dateChange">
+      <view class="picker-content">
+        <text class="date-text">{{date}}</text>
+        <text class="picker-hint">点击选择日期</text>
+      </view>
+    </picker>
+  </view>
+
+  <!-- 心情选择器 -->
+  <view class="mood-selector">
+    <view class="section-title">今天的心情</view>
+    <view class="mood-list">
+      <view 
+        class="mood-item {{selectedMood.value === item.value ? 'selected' : ''}}" 
+        wx:for="{{moodList}}" 
+        wx:key="value"
+        bindtap="selectMood"
+        data-mood="{{item}}"
+      >
+        <text class="mood-emoji">{{item.icon}}</text>
+        <text class="mood-label">{{item.label}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 心情强度 -->
+  <view class="mood-intensity">
+    <view class="section-title">心情强度</view>
+    <slider 
+      value="{{intensity}}" 
+      min="1" 
+      max="5" 
+      step="1" 
+      block-size="28" 
+      block-color="#1296db"
+      activeColor="#1296db"
+      show-value
+      bindchange="intensityChange"
+    />
+  </view>
+
+  <!-- 日记内容 -->
+  <view class="diary-content">
+    <view class="section-title">记录一下此刻的想法</view>
+    <textarea 
+      class="content-textarea" 
+      placeholder="写下你的心情..." 
+      value="{{content}}"
+      bindinput="contentInput"
+      maxlength="1000"
+    />
+    <view class="word-count">{{content.length}}/1000</view>
+  </view>
+
+  <!-- 标签选择 -->
+  <view class="tags-section">
+    <view class="section-title">添加标签</view>
+    <view class="tags-list">
+      <view 
+        class="tag-item {{selectedTags.includes(item) ? 'selected' : ''}}"
+        wx:for="{{tags}}"
+        wx:key="*this"
+        bindtap="toggleTag"
+        data-tag="{{item}}"
+      >
+        {{item}}
+      </view>
+      <view class="tag-item add-tag" bindtap="showAddTag">
+        <text class="add-icon">+</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 图片上传 -->
+  <view class="image-uploader">
+    <view class="section-title">添加图片</view>
+    <view class="image-list">
+      <view class="image-item" wx:for="{{images}}" wx:key="*this">
+        <image src="{{item}}" mode="aspectFill" bindtap="previewImage" data-url="{{item}}"/>
+        <view class="delete-btn" bindtap="deleteImage" data-index="{{index}}">×</view>
+      </view>
+      <view class="upload-btn" bindtap="chooseImage" wx:if="{{images.length < 9}}">
+        <text class="add-icon">+</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 保存按钮 -->
+  <view class="save-btn" bindtap="saveDiary">
+    保存日记
+  </view>
+</view> 

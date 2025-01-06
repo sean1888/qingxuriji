@@ -1,0 +1,112 @@
+.container {
+  padding: 20rpx;
+  background: #f6f6f6;
+  min-height: 100vh;
+}
+
+/* 头部样式 */
+.header {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+
+.nickname {
+  font-size: 32rpx;
+  color: #333;
+}
+
+.today-mood {
+  text-align: center;
+}
+
+.today-mood .label {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.mood-icon {
+  font-size: 60rpx;
+  margin-top: 10rpx;
+}
+
+/* 快速记录区域 */
+.quick-record {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.title {
+  font-size: 32rpx;
+  color: #333;
+  margin-bottom: 20rpx;
+  font-weight: bold;
+}
+
+.mood-list {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.mood-item {
+  width: 120rpx;
+  text-align: center;
+  margin: 10rpx;
+}
+
+.mood-emoji {
+  font-size: 50rpx;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.mood-label {
+  font-size: 24rpx;
+  color: #666;
+}
+
+/* 心情统计 */
+.mood-stats {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.stats-content {
+  height: 300rpx;
+  /* 后续添加图表样式 */
+}
+
+/* 每日提示 */
+.daily-tips {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+}
+
+.tip-content {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.6;
+  padding: 20rpx 0;
+} 

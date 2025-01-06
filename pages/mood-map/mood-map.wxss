@@ -1,0 +1,169 @@
+.container {
+  padding: 20rpx;
+  background: #f6f6f6;
+  min-height: 100vh;
+}
+
+/* 时间范围选择器 */
+.time-range {
+  background: #fff;
+  padding: 30rpx;
+  border-radius: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.month-picker {
+  text-align: center;
+  font-size: 34rpx;
+  color: #333;
+}
+
+.picker-hint {
+  font-size: 24rpx;
+  color: #999;
+  margin-left: 20rpx;
+}
+
+/* 心情日历 */
+.mood-calendar {
+  background: #fff;
+  padding: 30rpx;
+  border-radius: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-around;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.weekday {
+  width: 14.28%;
+  text-align: center;
+  font-size: 28rpx;
+  color: #666;
+}
+
+.calendar-body {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20rpx 0;
+}
+
+.day-item {
+  width: 14.28%;
+  height: 100rpx;
+  text-align: center;
+  padding: 10rpx 0;
+  box-sizing: border-box;
+}
+
+.day-number {
+  font-size: 24rpx;
+  color: #333;
+  margin-bottom: 10rpx;
+}
+
+.other-month {
+  color: #ccc;
+}
+
+.mood-icon {
+  font-size: 40rpx;
+}
+
+/* 心情统计 */
+.mood-stats {
+  background: #fff;
+  padding: 30rpx;
+  border-radius: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.stats-title {
+  font-size: 32rpx;
+  color: #333;
+  margin-bottom: 20rpx;
+  font-weight: bold;
+}
+
+.stats-content {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.stats-item {
+  text-align: center;
+  margin: 10rpx;
+}
+
+.stats-item .mood-icon {
+  font-size: 50rpx;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.mood-count {
+  font-size: 24rpx;
+  color: #666;
+}
+
+/* 心情趋势图 */
+.mood-trend {
+  background: #fff;
+  padding: 30rpx;
+  border-radius: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.trend-title {
+  font-size: 32rpx;
+  color: #333;
+  margin-bottom: 20rpx;
+  font-weight: bold;
+}
+
+.trend-chart {
+  height: 400rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chart-placeholder {
+  color: #999;
+  font-size: 28rpx;
+}
+
+/* 标签分析 */
+.tag-analysis {
+  background: #fff;
+  padding: 30rpx;
+  border-radius: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.analysis-title {
+  font-size: 32rpx;
+  color: #333;
+  margin-bottom: 20rpx;
+  font-weight: bold;
+}
+
+.tags-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20rpx;
+}
+
+.tag-item {
+  margin: 10rpx;
+  padding: 10rpx 20rpx;
+  background: #f0f0f0;
+  border-radius: 30rpx;
+  color: #666;
+} 

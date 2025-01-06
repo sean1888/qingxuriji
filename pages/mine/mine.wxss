@@ -1,0 +1,76 @@
+.container {
+  padding: 20rpx;
+  background: #f6f6f6;
+  min-height: 100vh;
+}
+
+/* 用户信息 */
+.user-info {
+  background: #fff;
+  padding: 40rpx 30rpx;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  margin-right: 30rpx;
+}
+
+.info-content {
+  flex: 1;
+}
+
+.nickname {
+  font-size: 34rpx;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+  display: block;
+}
+
+.sign {
+  font-size: 26rpx;
+  color: #999;
+}
+
+/* 功能列表 */
+.function-list {
+  background: #fff;
+  border-radius: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.function-item {
+  padding: 30rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.function-item:last-child {
+  border-bottom: none;
+}
+
+.function-title {
+  font-size: 30rpx;
+  color: #333;
+}
+
+.arrow {
+  color: #999;
+  font-size: 30rpx;
+}
+
+/* 版本信息 */
+.version-info {
+  text-align: center;
+  padding: 30rpx;
+  color: #999;
+  font-size: 26rpx;
+} 

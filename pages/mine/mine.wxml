@@ -1,0 +1,32 @@
+<!--pages/mine/mine.wxml-->
+<view class="container">
+  <!-- 用户信息 -->
+  <view class="user-info">
+    <image class="avatar" src="{{userInfo.avatarUrl || '/images/default-avatar.png'}}"></image>
+    <view class="info-content">
+      <text class="nickname">{{userInfo.nickName || '未登录'}}</text>
+      <text class="sign">记录每一天的心情变化</text>
+    </view>
+  </view>
+
+  <!-- 功能列表 -->
+  <view class="function-list">
+    <view class="function-item" bindtap="navigateToStatistics">
+      <text class="function-title">数据统计</text>
+      <text class="arrow">></text>
+    </view>
+    <view class="function-item" bindtap="navigateToSettings">
+      <text class="function-title">设置</text>
+      <text class="arrow">></text>
+    </view>
+    <view class="function-item" bindtap="navigateToAbout">
+      <text class="function-title">关于</text>
+      <text class="arrow">></text>
+    </view>
+  </view>
+
+  <!-- 版本信息 -->
+  <view class="version-info">
+    <text>版本 1.0.0</text>
+  </view>
+</view>
