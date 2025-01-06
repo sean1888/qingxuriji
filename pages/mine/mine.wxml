@@ -2,25 +2,61 @@
 <view class="container">
   <!-- 用户信息 -->
   <view class="user-info">
-    <image class="avatar" src="{{userInfo.avatarUrl || '/images/default-avatar.png'}}"></image>
-    <view class="info-content">
-      <text class="nickname">{{userInfo.nickName || '未登录'}}</text>
-      <text class="sign">记录每一天的心情变化</text>
+    <block wx:if="{{hasUserInfo}}">
+      <image class="avatar" src="{{userInfo.avatarUrl}}"></image>
+      <view class="info-content">
+        <text class="nickname">{{userInfo.nickName}}</text>
+        <text class="sign">记录每一天的心情变化</text>
+      </view>
+    </block>
+    <block wx:else>
+      <button class="login-btn" bindtap="getUserProfile">
+        <image class="avatar" src="/images/default-avatar.png"></image>
+        <view class="info-content">
+          <text class="nickname">点击登录</text>
+          <text class="sign">使用微信账号登录</text>
+        </view>
+      </button>
+    </block>
+  </view>
+
+  <!-- 统计卡片 -->
+  <view class="stats-cards">
+    <view class="stats-item">
+      <text class="stats-num">{{totalDays || 0}}</text>
+      <text class="stats-label">记录天数</text>
+    </view>
+    <view class="stats-item">
+      <text class="stats-num">{{moodCount || 0}}</text>
+      <text class="stats-label">心情记录</text>
+    </view>
+    <view class="stats-item">
+      <text class="stats-num">{{streakDays || 0}}</text>
+      <text class="stats-label">连续天数</text>
     </view>
   </view>
 
   <!-- 功能列表 -->
   <view class="function-list">
     <view class="function-item" bindtap="navigateToStatistics">
-      <text class="function-title">数据统计</text>
+      <view class="function-info">
+        <image class="function-icon" src="/images/icons/stats.png"></image>
+        <text class="function-title">数据统计</text>
+      </view>
       <text class="arrow">></text>
     </view>
     <view class="function-item" bindtap="navigateToSettings">
-      <text class="function-title">设置</text>
+      <view class="function-info">
+        <image class="function-icon" src="/images/icons/settings.png"></image>
+        <text class="function-title">设置</text>
+      </view>
       <text class="arrow">></text>
     </view>
     <view class="function-item" bindtap="navigateToAbout">
-      <text class="function-title">关于</text>
+      <view class="function-info">
+        <image class="function-icon" src="/images/icons/about.png"></image>
+        <text class="function-title">关于</text>
+      </view>
       <text class="arrow">></text>
     </view>
   </view>

@@ -9,9 +9,21 @@
   background: #fff;
   padding: 40rpx 30rpx;
   border-radius: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.login-btn {
   display: flex;
   align-items: center;
-  margin-bottom: 20rpx;
+  background: none;
+  padding: 0;
+  width: 100%;
+  border: none;
+  text-align: left;
+}
+
+.login-btn::after {
+  border: none;
 }
 
 .avatar {
@@ -38,6 +50,46 @@
   color: #999;
 }
 
+/* 统计卡片 */
+.stats-cards {
+  display: flex;
+  justify-content: space-between;
+  background: #fff;
+  padding: 30rpx;
+  border-radius: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.stats-item {
+  flex: 1;
+  text-align: center;
+  position: relative;
+}
+
+.stats-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2rpx;
+  height: 50%;
+  background: #f0f0f0;
+}
+
+.stats-num {
+  font-size: 40rpx;
+  color: #333;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.stats-label {
+  font-size: 24rpx;
+  color: #999;
+}
+
 /* 功能列表 */
 .function-list {
   background: #fff;
@@ -55,6 +107,17 @@
 
 .function-item:last-child {
   border-bottom: none;
+}
+
+.function-info {
+  display: flex;
+  align-items: center;
+}
+
+.function-icon {
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 20rpx;
 }
 
 .function-title {
