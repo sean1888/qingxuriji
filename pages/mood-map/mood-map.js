@@ -1,135 +1,276 @@
 // 获取应用实例
 const app = getApp()
+// 引入图表库
+const wxCharts = require('../../utils/wxcharts.js');
 
 Page({
   data: {
     currentMonth: '',
     calendarDays: [],
+    moodTypes: [
+      { label: '开心', value: 1, color: '#91d5ff', icon: '😊' },
+      { label: '平静', value: 2, color: '#b7eb8f', icon: '😐' },
+      { label: '低落', value: 3, color: '#ffd591', icon: '😢' },
+      { label: '焦虑', value: 4, color: '#ffa39e', icon: '😰' },
+      { label: '生气', value: 5, color: '#ff7875', icon: '😠' }
+    ],
     moodStats: [],
-    tagStats: []
+    tagCloud: []
   },
 
   onLoad() {
     // 设置当前月份
-    const today = new Date()
-    const currentMonth = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}`
+    const now = new Date();
+    const currentMonth = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+    this.setData({ currentMonth });
     
-    this.setData({ currentMonth })
-    this.generateCalendar(currentMonth)
-    this.calculateStats(currentMonth)
+    // 生成日历数据
+    this.generateCalendar();
+    // 加载数据并绘制图表
+    this.loadMonthData();
+  },
+
+  // 切换月份
+  changeMonth: function(e) {
+    this.setData({
+      currentMonth: e.detail.value
+    });
+    this.generateCalendar();
+    this.loadMonthData();
   },
 
   // 生成日历数据
-  generateCalendar(monthStr) {
-    const [year, month] = monthStr.split('-').map(Number)
-    const firstDay = new Date(year, month - 1, 1)
-    const lastDay = new Date(year, month, 0)
+  generateCalendar: function() {
+    const [year, month] = this.data.currentMonth.split('-').map(Number);
+    const firstDay = new Date(year, month - 1, 1);
+    const lastDay = new Date(year, month, 0);
+    const totalDays = lastDay.getDate();
     
     // 获取上个月的天数
-    const prevMonthDays = new Date(year, month - 1, 0).getDate()
+    const prevMonthDays = new Date(year, month - 1, 0).getDate();
     
     // 计算日历开始日期（上个月的日期）
-    const startDay = firstDay.getDay()
-    const calendarDays = []
+    const startDay = firstDay.getDay();
+    const calendarDays = [];
     
     // 添加上个月的日期
     for (let i = startDay - 1; i >= 0; i--) {
+      const day = prevMonthDays - i;
+      const prevMonth = month - 1;
+      const prevYear = prevMonth === 0 ? year - 1 : year;
+      const actualMonth = prevMonth === 0 ? 12 : prevMonth;
       calendarDays.push({
-        day: prevMonthDays - i,
-        date: `${year}-${String(month-1).padStart(2, '0')}-${String(prevMonthDays - i).padStart(2, '0')}`,
+        day,
+        date: `${prevYear}-${String(actualMonth).padStart(2, '0')}-${String(day).padStart(2, '0')}`,
         currentMonth: false
-      })
+      });
     }
     
     // 添加当前月的日期
-    for (let i = 1; i <= lastDay.getDate(); i++) {
+    for (let i = 1; i <= totalDays; i++) {
       calendarDays.push({
         day: i,
         date: `${year}-${String(month).padStart(2, '0')}-${String(i).padStart(2, '0')}`,
         currentMonth: true
-      })
+      });
     }
     
     // 添加下个月的日期
-    const remainingDays = 42 - calendarDays.length // 保持6行
+    const remainingDays = 42 - calendarDays.length; // 保持6行
     for (let i = 1; i <= remainingDays; i++) {
+      const nextMonth = month + 1;
+      const nextYear = nextMonth === 13 ? year + 1 : year;
+      const actualMonth = nextMonth === 13 ? 1 : nextMonth;
       calendarDays.push({
         day: i,
-        date: `${year}-${String(month+1).padStart(2, '0')}-${String(i).padStart(2, '0')}`,
+        date: `${nextYear}-${String(actualMonth).padStart(2, '0')}-${String(i).padStart(2, '0')}`,
         currentMonth: false
-      })
+      });
     }
     
-    // 获取每天的心情数据
+    this.setData({ calendarDays });
+    
+    // 加载每天的心情数据
+    this.loadDailyMoods(calendarDays);
+  },
+
+  // 加载每天的心情数据
+  loadDailyMoods: function(calendarDays) {
+    const records = wx.getStorageSync('diary_records') || [];
+    const moodMap = {};
+    
+    records.forEach(record => {
+      const date = record.date.split(' ')[0]; // 只取日期部分
+      moodMap[date] = {
+        value: record.mood,
+        icon: this.data.moodTypes.find(m => m.value === record.mood)?.icon
+      };
+    });
+    
     calendarDays.forEach(day => {
-      wx.getStorage({
-        key: `diary_${day.date}`,
-        success: res => {
-          day.mood = res.data.mood
-        }
-      })
-    })
+      day.mood = moodMap[day.date];
+    });
     
-    this.setData({ calendarDays })
+    this.setData({ calendarDays });
   },
 
-  // 计算统计数据
-  calculateStats(month) {
-    const moodStats = app.globalData.moodList.map(mood => ({
-      ...mood,
+  // 加载月度数据
+  loadMonthData: function() {
+    const records = wx.getStorageSync('diary_records') || [];
+    
+    // 过滤当月记录
+    const monthRecords = this.filterMonthRecords(records);
+    
+    // 计算心情统计
+    this.calculateMoodStats(monthRecords);
+    
+    // 生成标签云
+    this.generateTagCloud(monthRecords);
+    
+    // 绘制趋势图表
+    this.drawTrendChart(monthRecords);
+  },
+
+  // 过滤当月记录
+  filterMonthRecords: function(records) {
+    const [year, month] = this.data.currentMonth.split('-');
+    return records.filter(record => {
+      const recordDate = new Date(record.date);
+      return recordDate.getFullYear() === parseInt(year) && 
+             recordDate.getMonth() + 1 === parseInt(month);
+    });
+  },
+
+  // 计算心情统计
+  calculateMoodStats: function(records) {
+    const moodStats = this.data.moodTypes.map(type => ({
+      ...type,
       count: 0
-    }))
-    
-    const tagCounts = {}
-    
-    // 获取当月所有日记
-    const [year, monthNum] = month.split('-')
-    const lastDay = new Date(year, monthNum, 0).getDate()
-    
-    for (let day = 1; day <= lastDay; day++) {
-      const date = `${month}-${String(day).padStart(2, '0')}`
-      wx.getStorage({
-        key: `diary_${date}`,
-        success: res => {
-          const data = res.data
-          
-          // 统计心情
-          const moodIndex = moodStats.findIndex(m => m.value === data.mood.value)
-          if (moodIndex > -1) {
-            moodStats[moodIndex].count++
+    }));
+
+    records.forEach(record => {
+      const moodIndex = moodStats.findIndex(m => m.value === record.mood);
+      if (moodIndex > -1) {
+        moodStats[moodIndex].count++;
+      }
+    });
+
+    this.setData({ moodStats });
+  },
+
+  // 生成标签云
+  generateTagCloud: function(records) {
+    const tagCount = {};
+    records.forEach(record => {
+      (record.tags || []).forEach(tag => {
+        tagCount[tag] = (tagCount[tag] || 0) + 1;
+      });
+    });
+
+    const maxCount = Math.max(...Object.values(tagCount), 1);
+    const minSize = 24;
+    const maxSize = 40;
+
+    const tagCloud = Object.entries(tagCount)
+      .map(([name, count]) => ({
+        name,
+        size: minSize + (count / maxCount) * (maxSize - minSize)
+      }))
+      .sort((a, b) => b.size - a.size)
+      .slice(0, 20); // 最多显示20个标签
+
+    this.setData({ tagCloud });
+  },
+
+  // 绘制趋势图表
+  drawTrendChart: function(records) {
+    if (records.length === 0) {
+      // 如果没有记录，显示提示信息
+      this.setData({
+        trendChartEmpty: true
+      });
+      return;
+    }
+
+    this.setData({
+      trendChartEmpty: false
+    });
+
+    // 按日期排序
+    records.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+    // 准备图表数据
+    const categories = records.map(r => r.date.split('-')[2]); // 日期
+    const series = [{
+      name: '心情指数',
+      data: records.map(r => 6 - r.mood), // 转换心情值为指数：1->5, 2->4, 3->3, 4->2, 5->1
+      color: '#91d5ff',
+      format: function(val) {
+        return ['很好', '不错', '一般', '低落', '糟糕'][5 - val];
+      }
+    }];
+
+    // 获取系统信息
+    const systemInfo = wx.getSystemInfoSync();
+    const chartWidth = systemInfo.windowWidth - 40; // 考虑容器padding
+
+    try {
+      // 创建图表
+      new wxCharts({
+        canvasId: 'trendChart',
+        type: 'line',
+        categories: categories,
+        series: series,
+        width: chartWidth,
+        height: 200,
+        dataLabel: true, // 显示数据标签
+        dataPointShape: true,
+        extra: {
+          lineStyle: 'curve',
+          tooltip: {
+            showBox: true,
+            borderWidth: 1,
+            borderRadius: 4
           }
-          
-          // 统计标签
-          data.tags.forEach(tag => {
-            tagCounts[tag] = (tagCounts[tag] || 0) + 1
-          })
-          
-          // 更新统计数据
-          this.setData({ 
-            moodStats,
-            tagStats: Object.entries(tagCounts).map(([tag, count]) => ({
-              tag,
-              weight: Math.min(40 + count * 5, 60) // 字体大小范围：40-60rpx
-            }))
-          })
-        }
-      })
+        },
+        xAxis: {
+          disableGrid: true,
+          gridColor: '#cccccc',
+          fontColor: '#666666',
+          rotateLabel: false,
+          title: '日期',
+          titleFontSize: 12
+        },
+        yAxis: {
+          gridColor: '#cccccc',
+          fontColor: '#666666',
+          min: 1,
+          max: 5,
+          step: 1,
+          format: function(val) {
+            return ['糟糕', '低落', '一般', '不错', '很好'][val - 1];
+          },
+          title: '心情',
+          titleFontSize: 12
+        },
+        legend: false,
+        animation: true,
+        background: '#ffffff',
+        pixelRatio: systemInfo.pixelRatio
+      });
+    } catch (error) {
+      console.error('绘制图表失败:', error);
+      this.setData({
+        trendChartError: true
+      });
     }
   },
 
-  // 月份切换
-  monthChange(e) {
-    const month = e.detail.value
-    this.setData({ currentMonth: month })
-    this.generateCalendar(month)
-    this.calculateStats(month)
-  },
-
-  // 选择某一天
-  selectDay(e) {
-    const date = e.currentTarget.dataset.date
+  // 选择日期
+  selectDay: function(e) {
+    const date = e.currentTarget.dataset.date;
     wx.navigateTo({
       url: `/pages/diary/diary?date=${date}`
-    })
+    });
   }
 }) 

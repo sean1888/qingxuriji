@@ -1,7 +1,7 @@
 <view class="container">
   <!-- 时间范围选择 -->
   <view class="time-range">
-    <picker mode="date" fields="month" value="{{currentMonth}}" bindchange="monthChange">
+    <picker mode="date" fields="month" value="{{currentMonth}}" bindchange="changeMonth">
       <view class="month-picker">
         {{currentMonth}} <text class="picker-hint">切换月份</text>
       </view>
@@ -36,12 +36,19 @@
     </view>
   </view>
 
-  <!-- 心情趋势图 -->
-  <view class="mood-trend">
-    <view class="trend-title">心情变化趋势</view>
-    <view class="trend-chart">
-      <!-- 这里后续会接入图表组件 -->
-      <view class="chart-placeholder">图表开发中...</view>
+  <!-- 心情变化趋势 -->
+  <view class="trend-card">
+    <view class="card-title">心情变化趋势</view>
+    <view class="chart-container">
+      <block wx:if="{{!trendChartEmpty && !trendChartError}}">
+        <canvas canvas-id="trendChart" class="trend-chart"></canvas>
+      </block>
+      <view wx:elif="{{trendChartEmpty}}" class="chart-empty">
+        <text>本月暂无心情记录~</text>
+      </view>
+      <view wx:elif="{{trendChartError}}" class="chart-error">
+        <text>图表加载失败，请稍后重试</text>
+      </view>
     </view>
   </view>
 
