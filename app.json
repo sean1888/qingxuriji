@@ -4,7 +4,8 @@
     "pages/diary/diary",
     "pages/mood-map/mood-map",
     "pages/mine/mine",
-    "pages/settings/settings"
+    "pages/settings/settings",
+    "pages/statistics/statistics"
   ],
   "window": {
     "backgroundTextStyle": "light",
