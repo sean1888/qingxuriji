@@ -3,7 +3,10 @@
     "pages/index/index",
     "pages/diary/diary",
     "pages/mood-map/mood-map",
-    "pages/mine/mine"
+    "pages/mine/mine",
+    "pages/statistics/statistics",
+    "pages/settings/settings",
+    "pages/about/about"
   ],
   "window": {
     "backgroundTextStyle": "light",
