@@ -41,7 +41,7 @@
     <view class="card-title">心情变化趋势</view>
     <view class="chart-container">
       <block wx:if="{{!trendChartEmpty && !trendChartError}}">
-        <canvas canvas-id="trendChart" class="trend-chart"></canvas>
+        <canvas type="2d" id="trendChart" class="trend-chart"></canvas>
       </block>
       <view wx:elif="{{trendChartEmpty}}" class="chart-empty">
         <text>本月暂无心情记录~</text>

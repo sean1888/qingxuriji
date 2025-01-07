@@ -196,74 +196,83 @@ Page({
       trendChartEmpty: false
     });
 
-    // 按日期排序
-    records.sort((a, b) => new Date(a.date) - new Date(b.date));
+    const query = wx.createSelectorQuery();
+    query.select('#trendChart')
+      .fields({ node: true, size: true })
+      .exec((res) => {
+        const canvas = res[0].node;
+        const ctx = canvas.getContext('2d');
 
-    // 准备图表数据
-    const categories = records.map(r => r.date.split('-')[2]); // 日期
-    const series = [{
-      name: '心情指数',
-      data: records.map(r => 6 - r.mood), // 转换心情值为指数：1->5, 2->4, 3->3, 4->2, 5->1
-      color: '#91d5ff',
-      format: function(val) {
-        return ['很好', '不错', '一般', '低落', '糟糕'][5 - val];
-      }
-    }];
+        // 设置canvas尺寸
+        const dpr = wx.getSystemInfoSync().pixelRatio;
+        canvas.width = res[0].width * dpr;
+        canvas.height = res[0].height * dpr;
+        ctx.scale(dpr, dpr);
 
-    // 获取系统信息
-    const systemInfo = wx.getSystemInfoSync();
-    const chartWidth = systemInfo.windowWidth - 40; // 考虑容器padding
+        // 按日期排序
+        records.sort((a, b) => new Date(a.date) - new Date(b.date));
 
-    try {
-      // 创建图表
-      new wxCharts({
-        canvasId: 'trendChart',
-        type: 'line',
-        categories: categories,
-        series: series,
-        width: chartWidth,
-        height: 200,
-        dataLabel: true, // 显示数据标签
-        dataPointShape: true,
-        extra: {
-          lineStyle: 'curve',
-          tooltip: {
-            showBox: true,
-            borderWidth: 1,
-            borderRadius: 4
-          }
-        },
-        xAxis: {
-          disableGrid: true,
-          gridColor: '#cccccc',
-          fontColor: '#666666',
-          rotateLabel: false,
-          title: '日期',
-          titleFontSize: 12
-        },
-        yAxis: {
-          gridColor: '#cccccc',
-          fontColor: '#666666',
-          min: 1,
-          max: 5,
-          step: 1,
-          format: function(val) {
-            return ['糟糕', '低落', '一般', '不错', '很好'][val - 1];
-          },
-          title: '心情',
-          titleFontSize: 12
-        },
-        legend: false,
-        animation: true,
-        background: '#ffffff',
-        pixelRatio: systemInfo.pixelRatio
+        // 准备图表数据
+        const categories = records.map(r => r.date.split('-')[2]); // 日期
+        const series = [{
+          name: '心情指数',
+          data: records.map(r => 6 - r.mood), // 转换心情值为指数：1->5, 2->4, 3->3, 4->2, 5->1
+          color: '#91d5ff'
+        }];
+
+        try {
+          // 创建图表
+          new wxCharts({
+            canvas: canvas,
+            context: ctx,
+            type: 'line',
+            categories: categories,
+            series: series,
+            width: res[0].width,
+            height: res[0].height,
+            dataLabel: true,
+            dataPointShape: true,
+            extra: {
+              lineStyle: 'curve',
+              tooltip: {
+                showBox: true,
+                borderWidth: 1,
+                borderRadius: 4
+              }
+            },
+            xAxis: {
+              disableGrid: true,
+              gridColor: '#cccccc',
+              fontColor: '#666666',
+              rotateLabel: false,
+              title: '日期',
+              titleFontSize: 12
+            },
+            yAxis: {
+              gridColor: '#cccccc',
+              fontColor: '#666666',
+              min: 1,
+              max: 5,
+              step: 1,
+              format: function(val) {
+                return ['糟糕', '低落', '一般', '不错', '很好'][val - 1];
+              },
+              title: '心情',
+              titleFontSize: 12
+            },
+            legend: false,
+            animation: true,
+            background: '#ffffff',
+            enableScroll: true,
+            touchMoveLimit: 60
+          });
+        } catch (error) {
+          console.error('绘制图表失败:', error);
+          this.setData({
+            trendChartError: true
+          });
+        }
       });
-    } catch (error) {
-      console.error('绘制图表失败:', error);
-      this.setData({
-        trendChartError: true
-      });
-    }
   },
 
   // 选择日期
