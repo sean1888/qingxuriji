@@ -1,7 +1,12 @@
 {
   "description": "项目配置文件",
   "packOptions": {
-    "ignore": [],
+    "ignore": [
+      {
+        "value": ".DS_Store",
+        "type": "file"
+      }
+    ],
     "include": []
   },
   "setting": {
@@ -30,11 +35,14 @@
     "packNpmManually": false,
     "packNpmRelationList": [],
     "minifyWXSS": true,
+    "showES6CompileOption": false,
+    "minifyWXML": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
-    }
+    },
+    "condition": false
   },
   "compileType": "miniprogram",
   "libVersion": "2.19.4",
@@ -44,6 +52,5 @@
   "editorSetting": {
     "tabIndent": "insertSpaces",
     "tabSize": 2
-  },
-  "simulatorPluginLibVersion": {}
+  }
 }
