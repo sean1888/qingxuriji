@@ -1,0 +1,102 @@
+/* pages/settings/settings.wxss */
+.container {
+  padding: 20rpx;
+  background: #f6f6f6;
+  min-height: 100vh;
+}
+
+/* 设置区块 */
+.settings-section {
+  background: #fff;
+  border-radius: 20rpx;
+  margin-bottom: 20rpx;
+  overflow: hidden;
+}
+
+.section-title {
+  font-size: 28rpx;
+  color: #999;
+  padding: 30rpx;
+  padding-bottom: 10rpx;
+}
+
+/* 设置项 */
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx;
+  background: #fff;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.setting-item:last-child {
+  border-bottom: none;
+}
+
+.setting-label {
+  font-size: 30rpx;
+  color: #333;
+}
+
+.setting-action {
+  display: flex;
+  align-items: center;
+}
+
+.action-text {
+  font-size: 28rpx;
+  color: #999;
+  margin-right: 10rpx;
+}
+
+.arrow {
+  color: #999;
+  font-size: 28rpx;
+}
+
+/* 时间选择器 */
+.picker-value {
+  font-size: 28rpx;
+  color: #666;
+}
+
+/* 存储信息 */
+.storage-info {
+  padding: 0 30rpx 30rpx;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.info-item:last-child {
+  margin-bottom: 0;
+}
+
+.info-label {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.info-value {
+  font-size: 28rpx;
+  color: #333;
+}
+
+/* 警告项 */
+.warning .setting-label {
+  color: #ff4d4f;
+}
+
+.warning .action-text {
+  color: #ff4d4f;
+}
+
+/* 开关样式 */
+switch {
+  transform: scale(0.8);
+}

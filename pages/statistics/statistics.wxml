@@ -1,0 +1,71 @@
+<view class="container">
+  <!-- 时间范围选择 -->
+  <view class="time-selector">
+    <picker mode="selector" range="{{timeRanges}}" value="{{currentRangeIndex}}" bindchange="timeRangeChange">
+      <view class="picker">
+        {{timeRanges[currentRangeIndex]}}
+        <text class="picker-hint">点击切换时间范围</text>
+      </view>
+    </picker>
+  </view>
+
+  <!-- 情绪分布 -->
+  <view class="stats-card">
+    <view class="card-title">情绪分布</view>
+    <view class="mood-distribution">
+      <view class="distribution-item" wx:for="{{moodDistribution}}" wx:key="mood">
+        <view class="mood-icon">{{item.icon}}</view>
+        <view class="mood-bar">
+          <view class="bar-fill" style="width: {{item.percentage}}%"></view>
+        </view>
+        <view class="mood-percentage">{{item.percentage}}%</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 情绪变化趋势 -->
+  <view class="stats-card">
+    <view class="card-title">情绪变化趋势</view>
+    <view class="trend-chart">
+      <canvas canvas-id="trendChart" class="canvas"></canvas>
+    </view>
+  </view>
+
+  <!-- 标签统计 -->
+  <view class="stats-card">
+    <view class="card-title">标签统计</view>
+    <view class="tags-stats">
+      <view class="tag-item" wx:for="{{tagStats}}" wx:key="tag">
+        <view class="tag-name">{{item.tag}}</view>
+        <view class="tag-count">{{item.count}}次</view>
+        <view class="tag-bar">
+          <view class="bar-fill" style="width: {{item.percentage}}%"></view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 记录习惯 -->
+  <view class="stats-card">
+    <view class="card-title">记录习惯</view>
+    <view class="habit-stats">
+      <view class="habit-item">
+        <text class="habit-label">最常记录时间</text>
+        <text class="habit-value">{{habitStats.mostFrequentTime || '暂无数据'}}</text>
+      </view>
+      <view class="habit-item">
+        <text class="habit-label">最长连续记录</text>
+        <text class="habit-value">{{habitStats.longestStreak || 0}}天</text>
+      </view>
+      <view class="habit-item">
+        <text class="habit-label">记录完成率</text>
+        <text class="habit-value">{{habitStats.completionRate || 0}}%</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 导出数据按钮 -->
+  <view class="export-btn" bindtap="exportData">
+    导出统计数据
+  </view>
+</view> 

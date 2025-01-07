@@ -1,0 +1,12 @@
+{
+  "name": "qingxuriji",
+  "version": "1.0.0",
+  "description": "一款帮助用户记录和分析每日情绪的微信小程序。",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,155 @@
+.container {
+  padding: 20rpx;
+  background: #f6f6f6;
+  min-height: 100vh;
+}
+
+/* 时间选择器 */
+.time-selector {
+  background: #fff;
+  padding: 30rpx;
+  border-radius: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.picker {
+  text-align: center;
+  font-size: 34rpx;
+  color: #333;
+}
+
+.picker-hint {
+  font-size: 24rpx;
+  color: #999;
+  margin-left: 20rpx;
+}
+
+/* 统计卡片通用样式 */
+.stats-card {
+  background: #fff;
+  padding: 30rpx;
+  border-radius: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.card-title {
+  font-size: 32rpx;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 30rpx;
+}
+
+/* 情绪分布 */
+.mood-distribution {
+  padding: 20rpx 0;
+}
+
+.distribution-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.mood-icon {
+  font-size: 40rpx;
+  width: 60rpx;
+  text-align: center;
+}
+
+.mood-bar {
+  flex: 1;
+  height: 30rpx;
+  background: #f0f0f0;
+  border-radius: 15rpx;
+  margin: 0 20rpx;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  background: #1296db;
+  border-radius: 15rpx;
+  transition: width 0.3s ease;
+}
+
+.mood-percentage {
+  width: 80rpx;
+  font-size: 24rpx;
+  color: #666;
+  text-align: right;
+}
+
+/* 趋势图表 */
+.trend-chart {
+  height: 400rpx;
+  position: relative;
+}
+
+.canvas {
+  width: 100%;
+  height: 100%;
+}
+
+/* 标签统计 */
+.tags-stats {
+  padding: 20rpx 0;
+}
+
+.tag-item {
+  margin-bottom: 30rpx;
+}
+
+.tag-name {
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 10rpx;
+}
+
+.tag-count {
+  font-size: 24rpx;
+  color: #666;
+  margin-bottom: 10rpx;
+}
+
+.tag-bar {
+  height: 20rpx;
+  background: #f0f0f0;
+  border-radius: 10rpx;
+  overflow: hidden;
+}
+
+/* 记录习惯 */
+.habit-stats {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.habit-item {
+  width: 45%;
+  margin-bottom: 20rpx;
+}
+
+.habit-label {
+  font-size: 26rpx;
+  color: #666;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.habit-value {
+  font-size: 34rpx;
+  color: #333;
+  font-weight: bold;
+}
+
+/* 导出按钮 */
+.export-btn {
+  background: #1296db;
+  color: #fff;
+  text-align: center;
+  padding: 30rpx 0;
+  border-radius: 20rpx;
+  margin: 40rpx 0;
+  font-size: 32rpx;
+} 

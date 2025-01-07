@@ -1,0 +1,78 @@
+<!--pages/settings/settings.wxml-->
+<view class="container">
+  <!-- 通知设置 -->
+  <view class="settings-section">
+    <view class="section-title">通知设置</view>
+    <view class="setting-item">
+      <view class="setting-label">每日提醒</view>
+      <view class="setting-action">
+        <switch checked="{{dailyReminder}}" bindchange="toggleDailyReminder"/>
+      </view>
+    </view>
+    <view class="setting-item" wx:if="{{dailyReminder}}">
+      <view class="setting-label">提醒时间</view>
+      <view class="setting-action">
+        <picker mode="time" value="{{reminderTime}}" bindchange="changeReminderTime">
+          <view class="picker-value">{{reminderTime}}</view>
+        </picker>
+        <text class="arrow">></text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 隐私设置 -->
+  <view class="settings-section">
+    <view class="section-title">隐私设置</view>
+    <view class="setting-item">
+      <view class="setting-label">数据加密</view>
+      <view class="setting-action">
+        <switch checked="{{dataEncryption}}" bindchange="toggleDataEncryption"/>
+      </view>
+    </view>
+    <view class="setting-item">
+      <view class="setting-label">指纹解锁</view>
+      <view class="setting-action">
+        <switch checked="{{fingerprintLock}}" bindchange="toggleFingerprintLock"/>
+      </view>
+    </view>
+  </view>
+
+  <!-- 存储管理 -->
+  <view class="settings-section">
+    <view class="section-title">存储管理</view>
+    <view class="storage-info">
+      <view class="info-item">
+        <view class="info-label">已用空间</view>
+        <view class="info-value">{{usedStorage}} MB</view>
+      </view>
+      <view class="info-item">
+        <view class="info-label">总空间</view>
+        <view class="info-value">{{totalStorage}} MB</view>
+      </view>
+    </view>
+    <view class="setting-item">
+      <view class="setting-label">清理缓存</view>
+      <view class="setting-action">
+        <text class="action-text">{{cacheSize}} MB</text>
+        <text class="arrow">></text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 账号管理 -->
+  <view class="settings-section">
+    <view class="section-title">账号管理</view>
+    <view class="setting-item">
+      <view class="setting-label">修改密码</view>
+      <view class="setting-action">
+        <text class="arrow">></text>
+      </view>
+    </view>
+    <view class="setting-item warning" bindtap="logout">
+      <view class="setting-label">退出登录</view>
+      <view class="setting-action">
+        <text class="arrow">></text>
+      </view>
+    </view>
+  </view>
+</view>
