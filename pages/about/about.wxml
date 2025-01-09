@@ -1,2 +1,51 @@
 <!--pages/about/about.wxml-->
-<text>pages/about/about.wxml</text>
+<view class="container">
+  <!-- 应用信息 -->
+  <view class="app-info">
+    <image class="app-logo" src="/images/logo.png" mode="aspectFit"></image>
+    <text class="app-name">情绪日记</text>
+    <text class="app-version">版本 1.0.0</text>
+  </view>
+
+  <!-- 功能介绍 -->
+  <view class="feature-list">
+    <view class="section-title">主要功能</view>
+    <view class="feature-item">
+      <text class="feature-title">📝 情绪记录</text>
+      <text class="feature-desc">记录每日心情变化，支持文字、图片</text>
+    </view>
+    <view class="feature-item">
+      <text class="feature-title">📊 心情地图</text>
+      <text class="feature-desc">可视化展示情绪变化趋势</text>
+    </view>
+    <view class="feature-item">
+      <text class="feature-title">📈 数据分析</text>
+      <text class="feature-desc">智能分析情绪规律，提供个性化建议</text>
+    </view>
+  </view>
+
+  <!-- 开发团队 -->
+  <view class="team-info">
+    <view class="section-title">开发团队</view>
+    <text class="team-desc">由一个热爱生活、关注心理健康的开发者开发</text>
+  </view>
+
+  <!-- 联系方式 -->
+  <view class="contact-info">
+    <view class="section-title">联系我们</view>
+    <view class="contact-item" bindtap="copyEmail">
+      <text class="contact-label">邮箱：</text>
+      <text class="contact-value">seanworkforai@gmail.com</text>
+    </view>
+    <view class="contact-item" bindtap="copyWechat">
+      <text class="contact-label">微信：</text>
+      <text class="contact-value">xiaoyuyaoup</text>
+    </view>
+  </view>
+
+  <!-- 版权信息 -->
+  <view class="copyright">
+    <text>Copyright © 2025 情绪日记</text>
+    <text>All Rights Reserved</text>
+  </view>
+</view>

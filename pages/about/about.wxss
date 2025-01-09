@@ -1,1 +1,123 @@
 /* pages/about/about.wxss */
+.container {
+  padding: 30rpx;
+  background: #f6f6f6;
+  min-height: 100vh;
+}
+
+/* 应用信息 */
+.app-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40rpx 0;
+  background: #fff;
+  border-radius: 20rpx;
+  margin-bottom: 30rpx;
+}
+
+.app-logo {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 40rpx;
+  margin-bottom: 20rpx;
+}
+
+.app-name {
+  font-size: 36rpx;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+}
+
+.app-version {
+  font-size: 26rpx;
+  color: #999;
+}
+
+/* 功能列表 */
+.feature-list {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+}
+
+.feature-item {
+  margin-bottom: 20rpx;
+}
+
+.feature-title {
+  font-size: 30rpx;
+  color: #333;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.feature-desc {
+  font-size: 26rpx;
+  color: #666;
+}
+
+/* 团队信息 */
+.team-info {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+}
+
+.team-desc {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* 联系方式 */
+.contact-info {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+  padding: 20rpx;
+  background: #f8f8f8;
+  border-radius: 10rpx;
+}
+
+.contact-label {
+  font-size: 28rpx;
+  color: #333;
+  width: 100rpx;
+}
+
+.contact-value {
+  font-size: 28rpx;
+  color: #666;
+  flex: 1;
+}
+
+/* 版权信息 */
+.copyright {
+  text-align: center;
+  padding: 40rpx 0;
+}
+
+.copyright text {
+  display: block;
+  font-size: 24rpx;
+  color: #999;
+  line-height: 1.6;
+}
